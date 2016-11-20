@@ -10,12 +10,20 @@
 #define TILE_LINES 3
 #define TILE_LEN TILE_LINE_LEN * TILE_LINES + 1 /* Null terminator */
 
-struct tile {
-	enum edge edges[5]; /* Top, Right, Bottom, Left, Center. */
+enum attribute {
+	NONE = 0,
+	SHIELD = 1,
+	DEN = 2
 };
 
-struct tile create_tile(const enum edge edges[5]);
+struct tile {
+	enum edge edges[5]; /* Top, Right, Bottom, Left, Center. */
+	enum attribute attribute;
+};
+
+int tile_eq(struct tile a, struct tile b);
+struct tile make_tile(const enum edge edges[5], enum attribute a);
 struct tile rotate_tile(const struct tile old, const int rotation);
-void print_tile(struct tile t, char *b);
+char *print_tile(struct tile t, char b[TILE_LEN]);
 
 #endif
