@@ -11,9 +11,13 @@
 #include <sys/types.h>	/* read(), write() */
 
 #include "limits.h"
+<<<<<<< HEAD
+#include "game.h"
+=======
 #include "serialization.h"
 #include "game.h"
 #include "move.h"
+>>>>>>> Nick495/dev
 
 static struct sockaddr_in make_sockaddr_in_port(int port)
 {
@@ -68,6 +72,15 @@ static int connect_retry(char *host, int port)
 	return sockfd;
 }
 
+<<<<<<< HEAD
+static int get_clock(int sockfd, uint64_t *clock)
+{
+	*clock = 0;
+	unsigned char buf[sizeof(*clock)];
+	read(sockfd, buf, sizeof(buf));
+	for (size_t i = 0; i < sizeof(buf); ++i) {
+		*clock += (buf[i] << (i * 8));
+=======
 static int connect_game(char *host, int welcome_port)
 {
 	/* TODO: Better error handling. */
@@ -103,6 +116,7 @@ static int get_clock_and_order(int sockfd, int *first, uint64_t *clock)
 	*clock = 0;
 	for (size_t i = 0; i < sizeof(buf) - 1; ++i) {
 		*clock += (buf[i + 1] << (i * 8));
+>>>>>>> Nick495/dev
 	}
 	return 0;
 }
@@ -113,10 +127,20 @@ static int get_deck(int sockfd, struct tile *deck, size_t clen, size_t dlen)
 	for (size_t i = 0; i < dlen; ++i) {
 		read(sockfd, buf, clen);
 		enum edge edges[5];
+<<<<<<< HEAD
+		enum attribute a;
+		edges[0] = buf[0];
+		edges[1] = buf[1];
+		edges[2] = buf[2];
+		edges[3] = buf[3];
+		edges[4] = buf[4];
+		a = buf[5];
+=======
 		for (size_t j = 0; j < 5; ++j) {
 			edges[j] = buf[j];
 		}
 		enum attribute a = buf[5];
+>>>>>>> Nick495/dev
 		deck[i] = make_tile(edges, a);
 	}
 	return 0;
@@ -125,6 +149,49 @@ static int get_deck(int sockfd, struct tile *deck, size_t clen, size_t dlen)
 #define REMOTE_HOST "127.0.0.1" /* TODO: Get a command line variable. */
 #define REMOTE_PORT 5000 /* TODO: Factor into command line variable. */
 
+<<<<<<< HEAD
+//int main(int argc, char *argv[])
+int main(void)
+{
+	int sockfd;
+	if ((sockfd = connect_retry(REMOTE_HOST, htons(REMOTE_PORT))) < 0) {
+		printf("Error: %s\n", strerror(errno));
+		return 1;
+	} 
+
+	uint16_t port;
+	if (read(sockfd, &port, sizeof(port)) < 0) {
+		printf("Read error: %s\n", strerror(errno));
+		return 1;
+	}
+	printf("Got port: %u\n", ntohs(port));
+	close(sockfd);
+
+	if ((sockfd = connect_retry(REMOTE_HOST, port)) < 0) {
+		printf("Error: %s\n", strerror(errno));
+		return 1;
+	}
+
+	printf("Successfully connected.\n");
+	unsigned char buf[100];
+	uint64_t move_clock;
+	get_clock(sockfd, &move_clock);
+	printf("Clock: %llu\n", move_clock);
+
+	/* TODO: Refactor? */
+	struct game *g = malloc(sizeof(*g));
+	struct tile *tileset = malloc(sizeof(*tileset) * TILE_COUNT);
+	get_deck(sockfd, tileset, TILE_SZ, TILE_COUNT);
+	make_game_with_deck(g, tileset);
+	free(tileset);
+
+	for (int i = 0; i < TILE_COUNT; ++i) {
+		printf("%s\n", print_tile(deal_tile(g), buf));
+	}
+
+	close(sockfd);
+
+=======
 static struct game *init_game(int socket)
 {
 	/* TODO: Error handling? */
@@ -189,6 +256,7 @@ int main(void)
 		write(sockfd, buf, sizeof(buf));
 	}
 	close(sockfd);
+>>>>>>> Nick495/dev
 	free(g);
 	return 0;
 }
