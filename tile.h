@@ -15,7 +15,7 @@
 enum attribute {
 	NONE = 0,
 	SHIELD = 1,
-	MONASTERY = 2
+	DEN = 2
 };
 
 >>>>>>> origin/dev

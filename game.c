@@ -32,91 +32,91 @@ static void init_deck(struct tile deck[TILE_COUNT])
 	/* TODO: Refactor so that this fits in 80 columns. */
 	size_t ind = 0;
 	deck[ind++] = /* start tile, must be first. */
-		make_tile((enum edge[5]){CITY, ROAD, FIELD, ROAD, ROAD},
+		make_tile((enum edge[5]){LAKE, GAME-TRAIL, JUNGLE, GAME-TRAIL, GAME-TRAIL},
 		NONE);
 	deck[ind++] =
-		make_tile((enum edge[5]){CITY, CITY, CITY, CITY, CITY}, SHIELD);
+		make_tile((enum edge[5]){LAKE, LAKE, LAKE, LAKE, LAKE}, SHIELD);
 	deck[ind++] =
-		make_tile((enum edge[5]){ROAD, ROAD, ROAD, ROAD, ROAD}, NONE);
+		make_tile((enum edge[5]){GAME-TRAIL, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL}, NONE);
 	for (int i = 0; i < 7; ++i) {
 		const enum attribute a[7] =
 			{NONE, NONE, NONE, SHIELD, NONE, SHIELD, SHIELD};
-		const enum edge b[7] = {FIELD,FIELD,FIELD,FIELD,ROAD,ROAD,ROAD};
+		const enum edge b[7] = {JUNGLE,JUNGLE,JUNGLE,JUNGLE,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL};
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY, CITY, b[i], CITY, CITY},
+			make_tile((enum edge[5]){LAKE, LAKE, b[i], LAKE, LAKE},
 			a[i]);
 	}
 	for (int i = 0; i < 4; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){FIELD, ROAD, ROAD, ROAD, ROAD},
+			make_tile((enum edge[5]){JUNGLE, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL},
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		const enum attribute a[3] = {NONE, SHIELD, SHIELD};
 		deck[ind++] =
-			make_tile((enum edge[5]){FIELD, CITY, FIELD, CITY,CITY},
+			make_tile((enum edge[5]){JUNGLE, LAKE, JUNGLE, LAKE,LAKE},
 			a[i]);
 	}
 	for (int i = 0; i < 8; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){ROAD, FIELD, ROAD, FIELD,ROAD},
+			make_tile((enum edge[5]){GAME-TRAIL, JUNGLE, GAME-TRAIL, JUNGLE,GAME-TRAIL},
 			NONE);
 	}
 	for (int i = 0; i < 10; ++i) {
 		const enum attribute a[5] = {NONE, NONE, NONE, SHIELD, SHIELD};
-		const enum edge b[2] = {ROAD, FIELD};
+		const enum edge b[2] = {GAME-TRAIL, JUNGLE};
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY,b[i%2],b[i%2],CITY,CITY},
+			make_tile((enum edge[5]){LAKE,b[i%2],b[i%2],LAKE,LAKE},
 			a[i]);
 	}
 	for (int i = 0; i < 9; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){FIELD, FIELD, ROAD, ROAD,ROAD},
+			make_tile((enum edge[5]){JUNGLE, JUNGLE, GAME-TRAIL, GAME-TRAIL,GAME-TRAIL},
 			NONE);
 	}
 	for (int i = 0; i < 2; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY,CITY,FIELD,FIELD,FIELD},
+			make_tile((enum edge[5]){LAKE,LAKE,JUNGLE,JUNGLE,JUNGLE},
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){FIELD,CITY,FIELD,CITY,FIELD},
+			make_tile((enum edge[5]){JUNGLE,LAKE,JUNGLE,LAKE,JUNGLE},
 			NONE);
 	}
 	for (int i = 0; i < 2; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){FIELD,FIELD,ROAD,FIELD,FIELD},
-			MONASTERY);
+			make_tile((enum edge[5]){JUNGLE,JUNGLE,GAME-TRAIL,JUNGLE,JUNGLE},
+			DEN);
 	}
 	for (int i = 0; i < 4; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){FIELD,FIELD,FIELD,FIELD,FIELD},
-			MONASTERY);
+			make_tile((enum edge[5]){JUNGLE,JUNGLE,JUNGLE,JUNGLE,JUNGLE},
+			DEN);
 	}
 	for (int i = 0; i < 5; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY,FIELD,FIELD,FIELD,FIELD},
+			make_tile((enum edge[5]){LAKE,JUNGLE,JUNGLE,JUNGLE,JUNGLE},
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY,ROAD,ROAD,FIELD,ROAD},
+			make_tile((enum edge[5]){LAKE,GAME-TRAIL,GAME-TRAIL,JUNGLE,GAME-TRAIL},
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY,FIELD,ROAD,ROAD,ROAD},
+			make_tile((enum edge[5]){LAKE,JUNGLE,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL},
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY,ROAD,ROAD,ROAD,ROAD},
+			make_tile((enum edge[5]){LAKE,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL},
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
-			make_tile((enum edge[5]){CITY,ROAD,FIELD,ROAD,ROAD},
+			make_tile((enum edge[5]){LAKE,GAME-TRAIL,JUNGLE,GAME-TRAIL,GAME-TRAIL},
 			NONE);
 	}
 	assert(ind == TILE_COUNT);

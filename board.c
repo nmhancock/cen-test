@@ -239,10 +239,10 @@ int main(void)
 >>>>>>> origin/dev
 	enum edge edges[5][5] = {
 		{ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY },
-		{ ROAD, ROAD, ROAD, ROAD, ROAD },
-		{ FIELD, FIELD, FIELD, FIELD, FIELD },
-		{ CITY, CITY, CITY, CITY, CITY },
-		{ CITY, FIELD, ROAD, CITY, ROAD }
+		{ GAME-TRAIL, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL },
+		{ JUNGLE, JUNGLE, JUNGLE, JUNGLE, JUNGLE },
+		{ LAKE, LAKE, LAKE, LAKE, LAKE },
+		{ LAKE, JUNGLE, GAME-TRAIL, LAKE, GAME-TRAIL }
 	};
 	struct tile tiles[5] = {
 		make_tile(edges[0], NONE),
@@ -254,9 +254,9 @@ int main(void)
 
 	const char string[5][30] = {
 		"\nEmpty tile:",
-		"\nAll Road tile:",
-		"\nAll Field tile:",
-		"\nAll City tile:",
+		"\nAll GAME-TRAIL tile:",
+		"\nAll JUNGLE tile:",
+		"\nAll LAKE tile:",
 		"\nMixed tile:"
 	};
 
