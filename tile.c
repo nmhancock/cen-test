@@ -1,23 +1,8 @@
 #include "tile.h"
 
-int tile_eq(struct tile a, struct tile b)
-{
-	for (int i = 0; i < 5; ++i) {
-		if (a.edges[i] != b.edges[i]) {
-			return 0;
-		}
-	}
-	if (a.attribute != b.attribute) {
-		return 0;
-	} else {
-		return 1;
-	}
-}
-
-struct tile make_tile(const enum edge edges[5], enum attribute a)
+struct tile create_tile(const enum edge edges[5])
 {
 	struct tile t;
-	t.attribute = a;
 	memcpy(&t.edges, edges, sizeof(edges[0]) * 5);
 	return t;
 }
@@ -31,10 +16,10 @@ struct tile rotate_tile(const struct tile old, const int rotation)
 	for (unsigned int i = 4; i > 0; --i) { /* Need unsigned for wrapping */
 		new[i - 1] = old.edges[(i - 1 - rotation) % 4];
 	}
-	return make_tile(new, old.attribute);
+	return create_tile(new);
 }
 
-char *print_tile(const struct tile t, char b[TILE_LEN])
+void print_tile(const struct tile t, char *b)
 {
 	/* Our array stores in clockwise order starting at the top.
 	 * So the tile looks like this: (indexes)
@@ -57,5 +42,5 @@ char *print_tile(const struct tile t, char b[TILE_LEN])
 				b[1] = c[t.edges[0]];
 	b[4] = c[t.edges[3]];	b[5] = c[t.edges[4]]; b[6] = c[t.edges[1]];
 				b[9] = c[t.edges[2]];
-	return b;
+	return;
 }
