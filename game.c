@@ -32,6 +32,7 @@ static void init_deck(struct tile deck[TILE_COUNT])
 	/* TODO: Refactor so that this fits in 80 columns. */
 	size_t ind = 0;
 	deck[ind++] = /* start tile, must be first. */
+<<<<<<< HEAD
 		make_tile((enum edge[5]){LAKE, GAME-TRAIL, JUNGLE, GAME-TRAIL, GAME-TRAIL},
 		NONE);
 	deck[ind++] =
@@ -44,48 +45,93 @@ static void init_deck(struct tile deck[TILE_COUNT])
 		const enum edge b[7] = {JUNGLE,JUNGLE,JUNGLE,JUNGLE,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL};
 		deck[ind++] =
 			make_tile((enum edge[5]){LAKE, LAKE, b[i], LAKE, LAKE},
+=======
+		make_tile((enum edge[5]){CITY, ROAD, FIELD, ROAD, ROAD},
+		NONE);
+	deck[ind++] =
+		make_tile((enum edge[5]){CITY, CITY, CITY, CITY, CITY}, SHIELD);
+	deck[ind++] =
+		make_tile((enum edge[5]){ROAD, ROAD, ROAD, ROAD, ROAD}, NONE);
+	for (int i = 0; i < 7; ++i) {
+		const enum attribute a[7] =
+			{NONE, NONE, NONE, SHIELD, NONE, SHIELD, SHIELD};
+		const enum edge b[7] = {FIELD,FIELD,FIELD,FIELD,ROAD,ROAD,ROAD};
+		deck[ind++] =
+			make_tile((enum edge[5]){CITY, CITY, b[i], CITY, CITY},
+>>>>>>> Nick495/dev
 			a[i]);
 	}
 	for (int i = 0; i < 4; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){JUNGLE, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL, GAME-TRAIL},
+=======
+			make_tile((enum edge[5]){FIELD, ROAD, ROAD, ROAD, ROAD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		const enum attribute a[3] = {NONE, SHIELD, SHIELD};
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){JUNGLE, LAKE, JUNGLE, LAKE,LAKE},
+=======
+			make_tile((enum edge[5]){FIELD, CITY, FIELD, CITY,CITY},
+>>>>>>> Nick495/dev
 			a[i]);
 	}
 	for (int i = 0; i < 8; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){GAME-TRAIL, JUNGLE, GAME-TRAIL, JUNGLE,GAME-TRAIL},
+=======
+			make_tile((enum edge[5]){ROAD, FIELD, ROAD, FIELD,ROAD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 10; ++i) {
 		const enum attribute a[5] = {NONE, NONE, NONE, SHIELD, SHIELD};
+<<<<<<< HEAD
 		const enum edge b[2] = {GAME-TRAIL, JUNGLE};
 		deck[ind++] =
 			make_tile((enum edge[5]){LAKE,b[i%2],b[i%2],LAKE,LAKE},
+=======
+		const enum edge b[2] = {ROAD, FIELD};
+		deck[ind++] =
+			make_tile((enum edge[5]){CITY,b[i%2],b[i%2],CITY,CITY},
+>>>>>>> Nick495/dev
 			a[i]);
 	}
 	for (int i = 0; i < 9; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){JUNGLE, JUNGLE, GAME-TRAIL, GAME-TRAIL,GAME-TRAIL},
+=======
+			make_tile((enum edge[5]){FIELD, FIELD, ROAD, ROAD,ROAD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 2; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){LAKE,LAKE,JUNGLE,JUNGLE,JUNGLE},
+=======
+			make_tile((enum edge[5]){CITY,CITY,FIELD,FIELD,FIELD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){JUNGLE,LAKE,JUNGLE,LAKE,JUNGLE},
+=======
+			make_tile((enum edge[5]){FIELD,CITY,FIELD,CITY,FIELD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 2; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){JUNGLE,JUNGLE,GAME-TRAIL,JUNGLE,JUNGLE},
 			DEN);
 	}
@@ -97,26 +143,55 @@ static void init_deck(struct tile deck[TILE_COUNT])
 	for (int i = 0; i < 5; ++i) {
 		deck[ind++] =
 			make_tile((enum edge[5]){LAKE,JUNGLE,JUNGLE,JUNGLE,JUNGLE},
+=======
+			make_tile((enum edge[5]){FIELD,FIELD,ROAD,FIELD,FIELD},
+			MONASTERY);
+	}
+	for (int i = 0; i < 4; ++i) {
+		deck[ind++] =
+			make_tile((enum edge[5]){FIELD,FIELD,FIELD,FIELD,FIELD},
+			MONASTERY);
+	}
+	for (int i = 0; i < 5; ++i) {
+		deck[ind++] =
+			make_tile((enum edge[5]){CITY,FIELD,FIELD,FIELD,FIELD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){LAKE,GAME-TRAIL,GAME-TRAIL,JUNGLE,GAME-TRAIL},
+=======
+			make_tile((enum edge[5]){CITY,ROAD,ROAD,FIELD,ROAD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){LAKE,JUNGLE,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL},
+=======
+			make_tile((enum edge[5]){CITY,FIELD,ROAD,ROAD,ROAD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){LAKE,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL,GAME-TRAIL},
+=======
+			make_tile((enum edge[5]){CITY,ROAD,ROAD,ROAD,ROAD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	for (int i = 0; i < 3; ++i) {
 		deck[ind++] =
+<<<<<<< HEAD
 			make_tile((enum edge[5]){LAKE,GAME-TRAIL,JUNGLE,GAME-TRAIL,GAME-TRAIL},
+=======
+			make_tile((enum edge[5]){CITY,ROAD,FIELD,ROAD,ROAD},
+>>>>>>> Nick495/dev
 			NONE);
 	}
 	assert(ind == TILE_COUNT);
@@ -144,6 +219,14 @@ int play_move(struct game *g, struct move m, int player)
 	// Graph and score stuff here.
 }
 
+<<<<<<< HEAD
+=======
+int more_tiles(struct game *g)
+{
+	return TILE_COUNT - g->tiles_used - 1;
+}
+
+>>>>>>> Nick495/dev
 struct tile deal_tile(struct game *g)
 {
 	return g->tile_deck[g->tiles_used++];

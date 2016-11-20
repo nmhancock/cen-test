@@ -1,6 +1,7 @@
 #include "board.h"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #define AXIS 5 /* AXIS by AXIS board */
 
 struct board {
@@ -28,11 +29,14 @@ struct board make_board(void)
 
 =======
 >>>>>>> origin/dev
+=======
+>>>>>>> Nick495/dev
 static size_t index_slot(struct slot s)
 {
 	return AXIS * s.x + s.y;
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void print_board(struct board b)
 {
@@ -58,9 +62,10 @@ void print_board(struct board b)
 
 =======
 >>>>>>> origin/dev
+=======
+>>>>>>> Nick495/dev
 static int slot_placeable(struct board b, struct slot s)
 {
-#if 0
 	/* TODO: Switch to linear search? */
 	/* Linear search open positions for the desired one. */
 	for (unsigned i = 0; i < b.sps; ++i) {
@@ -71,24 +76,6 @@ static int slot_placeable(struct board b, struct slot s)
 			return i + 1;
 		case 1:
 			return 0;
-		}
-	}
-#endif
-	/* Binary search open positions for the desired one. */
-	int low = 0;
-	int high = b.sps;
-	int m;
-	while (low < high) {
-		m = (low + high) / 2;
-		switch(compare_slots(b.slot_spots[m], s)) {
-		case -1:
-			low = m + 1;
-			break;
-		case 1:
-			high = m - 1;
-			break;
-		case 0:
-			return m + 1; /* Guarenteed to be > 0. */
 		}
 	}
 	return 0;
@@ -157,6 +144,7 @@ static struct board update_slot_spots(struct board b, struct slot s)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 struct move {
 	struct tile tile;
 	struct slot slot;
@@ -178,6 +166,10 @@ static int validate_move(struct board b, struct move m)
 /* TODO: Switch int error codes to error enums for cleanliness. */
 static int invalid_move(struct board b, struct move m)
 >>>>>>> origin/dev
+=======
+/* TODO: Switch int error codes to error enums for cleanliness. */
+static int invalid_move(struct board b, struct move m)
+>>>>>>> Nick495/dev
 {
 	if (!slot_placeable(b, m.slot)) {
 		return 1; /* Slot not placeable. */
@@ -196,21 +188,78 @@ static int invalid_move(struct board b, struct move m)
 		/* The (i + 2) % 4 math here is a bit evil, but it works. */
 		enum edge pair = b.tiles[index_slot(adj[i])].edges[(i + 2) % 4];
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (pair == NONE) {
 =======
 		if (pair == EMPTY) {
 >>>>>>> origin/dev
+=======
+		if (pair == EMPTY) {
+>>>>>>> Nick495/dev
 			continue; /* Empty tiles match with everything. */
 		}
 		if (pair != m.tile.edges[i]) { /* Corresponding don't match. */
 			return 2;
+<<<<<<< HEAD
+=======
 		}
 	}
 	return 0;
 }
 
+struct board make_board(void)
+{
+       struct board b;
+       enum edge edges[5] = { EMPTY, EMPTY, EMPTY, EMPTY, EMPTY };
+       const unsigned int mid = (AXIS - 1) / 2; /* Must start in center. */
+       b.slot_spots[0] = make_slot(mid, mid);
+       b.sps = 1;
+       for (unsigned int i = 0; i < AXIS*AXIS; ++i) {
+		b.tiles[i] = make_tile(edges, NONE);
+       }
+       /* Tab between columns except for the last one, which newlines. */
+       memset(b.column_terminators, '\t', AXIS - 1);
+       b.column_terminators[AXIS - 1] = '\n';
+       return b;
+}
+
+char *print_board(struct board b, char res[BOARD_LEN])
+{
+	const size_t cnt = TILE_LINES;
+	const size_t len = TILE_LINE_LEN;
+	char buf[TILE_LEN];
+
+	/* Pretty print the board in NxN format. */
+	for (size_t i = 0; i < AXIS; ++i) {
+		for (size_t j = 0; j < AXIS; ++j) {
+			print_tile(b.tiles[index_slot(make_slot(i, j))], buf);
+			for (size_t k = 0; k < cnt; ++k) {
+				const size_t ind = ((i *cnt +k) *AXIS +j) *len;
+				buf[(k + 1) *len - 1] = b.column_terminators[j];
+				memcpy(&res[ind], &buf[len * k], len);
+			}
+>>>>>>> Nick495/dev
+		}
+	}
+	res[BOARD_LEN - 1] = '\0';
+	return res;
+}
+
+/* See TODO for invalid_move. */
+int play_move_board(struct board *b, struct move m)
+{
+	int rc;
+	if ((rc = invalid_move(*b, m))) {
+		return rc;
+	}
+	b->tiles[index_slot(m.slot)] = rotate_tile(m.tile, m.rotation);
+	*b = update_slot_spots(*b, m.slot);
+	return 0;
+}
+
 #ifdef TEST
 static void print_placeable_slots(struct board b)
+<<<<<<< HEAD
 {
 	printf("Slots:\n");
 	printf("X\tY\n");
@@ -222,6 +271,19 @@ static void print_placeable_slots(struct board b)
 
 static void play_and_check_move(struct board *b, struct move m)
 {
+=======
+{
+	printf("Slots:\n");
+	printf("X\tY\n");
+	for (size_t i = 0; i < b.sps; ++i) {
+		printf("%u\t%u\n", b.slot_spots[i].x, b.slot_spots[i].y);
+	}
+	return;
+}
+
+static void play_and_check_move(struct board *b, struct move m)
+{
+>>>>>>> Nick495/dev
 	int rc;
 	if ((rc = play_move_board(b, m))) {
 		printf("Invalid move! %d\n", rc);
@@ -234,6 +296,7 @@ int main(void)
 {
 	char buffer[TILE_LEN];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	char board_buffer[BOARD_LEN];
 >>>>>>> origin/dev
@@ -243,6 +306,15 @@ int main(void)
 		{ JUNGLE, JUNGLE, JUNGLE, JUNGLE, JUNGLE },
 		{ LAKE, LAKE, LAKE, LAKE, LAKE },
 		{ LAKE, JUNGLE, GAME-TRAIL, LAKE, GAME-TRAIL }
+=======
+	char board_buffer[BOARD_LEN];
+	enum edge edges[5][5] = {
+		{ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY },
+		{ ROAD, ROAD, ROAD, ROAD, ROAD },
+		{ FIELD, FIELD, FIELD, FIELD, FIELD },
+		{ CITY, CITY, CITY, CITY, CITY },
+		{ CITY, FIELD, ROAD, CITY, ROAD }
+>>>>>>> Nick495/dev
 	};
 	struct tile tiles[5] = {
 		make_tile(edges[0], NONE),
@@ -254,9 +326,15 @@ int main(void)
 
 	const char string[5][30] = {
 		"\nEmpty tile:",
+<<<<<<< HEAD
 		"\nAll GAME-TRAIL tile:",
 		"\nAll JUNGLE tile:",
 		"\nAll LAKE tile:",
+=======
+		"\nAll Road tile:",
+		"\nAll Field tile:",
+		"\nAll City tile:",
+>>>>>>> Nick495/dev
 		"\nMixed tile:"
 	};
 
@@ -298,6 +376,7 @@ int main(void)
 	return 0;
 }
 #endif
+<<<<<<< HEAD
 
 struct board make_board(void)
 {
@@ -347,3 +426,5 @@ int play_move_board(struct board *b, struct move m)
 	*b = update_slot_spots(*b, m.slot);
 	return 0;
 }
+=======
+>>>>>>> Nick495/dev

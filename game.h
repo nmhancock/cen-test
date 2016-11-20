@@ -23,17 +23,29 @@
 #define TILE_COUNT 72
 
 struct game {
+<<<<<<< HEAD
 	int graphs[100]; /* Placeholder for struct graph */
+=======
+>>>>>>> Nick495/dev
 	struct board board;
 	struct tile tile_deck[TILE_COUNT];
 	size_t graphs_used;
 	size_t tiles_used;
+<<<<<<< HEAD
 	int scores[2];
+=======
+	int scores[PLAYER_COUNT];
+	size_t graph_indices[TILE_COUNT * TILE_COUNT * 3];
+>>>>>>> Nick495/dev
 };
 
 void make_game(struct game *g);
 void make_game_with_deck(struct game *g, struct tile *deck);
 int play_move(struct game *g, struct move m, int player);
+<<<<<<< HEAD
+=======
+int more_tiles(struct game *g);
+>>>>>>> Nick495/dev
 struct tile deal_tile(struct game *g);
 
 #endif
