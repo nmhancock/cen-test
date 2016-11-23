@@ -1,5 +1,7 @@
 #include "tile.h"
 
+<<<<<<< HEAD
+=======
 int tile_eq(struct tile a, struct tile b)
 {
 	for (int i = 0; i < 5; ++i) {
@@ -14,6 +16,7 @@ int tile_eq(struct tile a, struct tile b)
 	}
 }
 
+>>>>>>> Nick495/dev
 struct tile make_tile(const enum edge edges[5], enum attribute a)
 {
 	struct tile t;
